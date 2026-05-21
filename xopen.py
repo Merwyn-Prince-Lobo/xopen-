@@ -1,20 +1,11 @@
 #!/usr/bin/env python3
-"""
-xopen - Universal file opener
-Works on Linux, macOS, and Windows
-Usage: xopen <file>   or   xopen .   (to open current directory)
-"""
 
 import sys
 import os
 import subprocess
 import platform
 
-# ──────────────────────────────────────────────
-#  App mappings per file type
-#  Format: extension -> (linux_cmd, mac_cmd, windows_cmd)
-#  Use None to fall back to system default
-# ──────────────────────────────────────────────
+
 APP_MAP = {
     # Video
     ".mp4":  ("xdg-open", "open", "start"),
@@ -91,7 +82,7 @@ def open_file(path):
 
     # Directory → open file manager
     if os.path.isdir(path):
-        print(c("cyan", f"📂 Opening directory: {path}"))
+        print(c("cyan", f" Opening directory: {path}"))
         cmd = {"linux": "xdg-open", "mac": "open", "windows": "explorer"}[os_name]
         _run([cmd, path], os_name)
         return
@@ -115,7 +106,6 @@ def open_file(path):
 def _run(cmd_list, os_name):
     try:
         if os_name == "windows":
-            # 'start' is a shell built-in on Windows
             subprocess.Popen(cmd_list, shell=True,
                              stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
         else:
@@ -152,7 +142,6 @@ def main():
 
     target = sys.argv[1]
 
-    # Special: "." means current dir
     if target == ".":
         target = os.getcwd()
 
