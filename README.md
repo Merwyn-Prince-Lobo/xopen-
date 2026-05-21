@@ -1,6 +1,6 @@
 # xopen — Universal File Opener
 
-One command to open anything. Works on **Linux**, **macOS**, and **Windows**.
+One command to open anything. Works on **Linux**, **macOS**(not sure learnt recently), and **Windows**.
 
 ## Install
 
